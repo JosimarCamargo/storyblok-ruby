@@ -12,7 +12,7 @@ describe Storyblok::Request do
   context "#copy" do
     it "Returns a copy of StoryBlock:Request object initialized" do
       object_duplicated = subject.copy
-      expect(subject.client).not_to        eq(object_duplicated.client)
+      expect(subject.client).to        eq(object_duplicated.client)
       expect(subject.endpoint).to      eq(object_duplicated.endpoint)
       expect(subject.query).to         eq(object_duplicated.query)
       expect(subject.id).to            eq(object_duplicated.id)

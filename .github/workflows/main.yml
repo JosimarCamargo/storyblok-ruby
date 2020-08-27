@@ -44,4 +44,4 @@ jobs:
       run: COVERAGE=true rspec --tag ~redis_cache:true
 
     - name: Send coverage report
-      run: ./cc-test-reporter -d after-build -t simplecov
+      run: ./cc-test-reporter -d after-build -t simplecov --exit-code 1
