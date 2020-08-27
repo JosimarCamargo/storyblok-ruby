@@ -25,14 +25,14 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Cache Test Reporter dependency
-      id: cache-primes
+      id: cache-binary-test-reporter
       uses: actions/cache@v2
       with:
         path: cc-test-reporter
-        key: ${{ runner.os }}-primes
+        key: ${{ runner.os }}-binary-test-reporter
 
-    - name: Generate Prime Numbers
-      if: steps.cache-primes.outputs.cache-hit != 'true'
+    - name: Download the test binary reporter from CodeClimate
+      if: steps.cache-binary-test-reporter.outputs.cache-hit != 'true'
       run: |
         curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
         chmod +x ./cc-test-reporter
