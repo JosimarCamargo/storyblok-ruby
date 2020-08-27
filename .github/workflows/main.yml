@@ -12,38 +12,37 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+  jobs1:
+    env:
+      CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
-    - uses: actions/setup-ruby@v1
-      with:
-        ruby-version: '2.6'
+    # This workflow contains a single job called "build"
+    build:
+      # The type of runner that the job will run on
+      runs-on: ubuntu-latest
 
-    # Runs a single command using the runners shell
-    - name: Install development/test dependencies
-      run: |
-        gem install bundler:1.17.2
-        bundle
-    - name: Reporter setup
-      run: |
-        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-        chmod +x ./cc-test-reporter
-        ./cc-test-reporter -d before-build
-      env:
-        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      # Steps represent a sequence of tasks that will be executed as part of the job
+      steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '2.6'
 
+      # Runs a single command using the runners shell
+      - name: Install development/test dependencies
+        run: |
+          gem install bundler:1.17.2
+          bundle
+      - name: Reporter setup
+        run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+          ./cc-test-reporter -d before-build
 
-    # Runs a set of commands using the runners shell
-    - name: Run Rspec
-      run: COVERAGE=true rspec --tag ~redis_cache:true
+      # Runs a set of commands using the runners shell
+      - name: Run Rspec
+        run: COVERAGE=true rspec --tag ~redis_cache:true
 
-    - name: Send coverage report
-      run: ./cc-test-reporter -d after-build -t simplecov --exit-code 0
-      env:
-        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      - name: Send coverage report
+        run: ./cc-test-reporter -d after-build -t simplecov --exit-code 0
