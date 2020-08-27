@@ -19,7 +19,6 @@ client = Storyblok::Client.new(
   cache: cache
 )
 
-
 res = client.flush
 res = client.story('authors/page', {version: 'published'})
 puts client.cache_version
