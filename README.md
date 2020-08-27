@@ -1,4 +1,9 @@
-# About
+# Storyblok ruby API Client
+[![Maintainability](https://api.codeclimate.com/v1/badges/505268c4a0ce10df5def/maintainability)](https://codeclimate.com/github/JosimarCamargo/storyblok-ruby/maintainability)
+
+[![Test Coverage](https://api.codeclimate.com/v1/badges/505268c4a0ce10df5def/test_coverage)](https://codeclimate.com/github/JosimarCamargo/storyblok-ruby/test_coverage)
+
+## About
 This is the Storyblok ruby client for easy access of the management and content delivery api.
 
 ## Install
